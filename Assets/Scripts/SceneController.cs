@@ -6,11 +6,10 @@ using UnityEngine.UI;
 public class SceneController : MonoBehaviour
 {
     [SerializeField] private GameObject UI;
-    [SerializeField] private TimeScriptableObject timeScript;
+    [SerializeField] private PlayerData timeScript;
     [SerializeField] private string location;
     
-    public GameObject PCUI;
-    public GameObject doorUI;
+    private MainUIData mainUIData;
     
     public static SceneController Instance { get; private set; }
     
@@ -31,12 +30,16 @@ public class SceneController : MonoBehaviour
 
     public void ButtonClickPC()
     {
-        PCUI.SetActive(!PCUI.activeSelf);
+        mainUIData.PCUI.SetActive(!mainUIData.PCUI.activeSelf);
+        mainUIData.DateObject.SetActive(!mainUIData.PCUI.activeSelf);
+        Time.timeScale = mainUIData.PCUI.activeSelf ? 0 : 1;
     }
 
     public void ButtonClickDoor()
     {
-        doorUI.SetActive(!doorUI.activeSelf);
+        mainUIData.DoorUI.SetActive(!mainUIData.DoorUI.activeSelf);
+        mainUIData.DateObject.SetActive(!mainUIData.DoorUI.activeSelf);
+        Time.timeScale = mainUIData.DoorUI.activeSelf ? 0 : 1;
     }
 
     private void InitializeMainUI()
@@ -55,13 +58,24 @@ public class SceneController : MonoBehaviour
             }
         }
         
-        MainUIData uiData = ui[0].GetComponent<MainUIData>();
+        mainUIData = ui[0].GetComponent<MainUIData>();
 
-        TextMeshProUGUI gametime = uiData.Time;
-        Image dayImage = uiData.DayImage;
-        TextMeshProUGUI date = uiData.Date;
-        TextMeshProUGUI dialogueName = uiData.DialogueName; 
-        TextMeshProUGUI dialogue = uiData.Dialogue;
+        TextMeshProUGUI gametime = mainUIData.Time;
+        Image dayImage = mainUIData.DayImage;
+        TextMeshProUGUI date = mainUIData.Date;
+        TextMeshProUGUI dialogueName = mainUIData.DialogueName; 
+        TextMeshProUGUI dialogue = mainUIData.Dialogue;
+        Button closeDoor = mainUIData.CloseDoorUI;
+        Button closePC = mainUIData.ClosePCUI;
+
+        Button fishing = mainUIData.FishingButton;
+        Button hunting = mainUIData.FishingButton;
+        
+        fishing.onClick.AddListener(LoadFishingScene);
+        hunting.onClick.AddListener(LoadHuntingScene);
+        
+        closeDoor.onClick.AddListener(ButtonClickDoor);
+        closePC.onClick.AddListener(ButtonClickPC);
         
         InitializeDateAndTime(date,gametime);
     }
@@ -71,10 +85,26 @@ public class SceneController : MonoBehaviour
         date.text = timeScript.Month + " " + timeScript.Day;
         time.text = $"{timeScript.Hour:D2}:{timeScript.Minute:D2}";
     }
+
+    private void LoadFishingScene()
+    {
+        
+    }
+
+    private void LoadHuntingScene()
+    {
+        
+    }
+
+    public void LoadHomeScene()
+    {
+        
+    }
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Сцена {scene.name} загружена!");
+        location = scene.name;
         InitializeMainUI();
     }
 }

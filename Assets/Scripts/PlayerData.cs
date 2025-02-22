@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TimeData", menuName = "Data/Time Data")]
-public class TimeScriptableObject : ScriptableObject
+[CreateAssetMenu(fileName = "PlayerData", menuName = "Data/Player Data")]
+public class PlayerData : ScriptableObject
 {
     public int Hour;
     public int Minute;
     public string Month;
     public int Day;
+    public string DayOfMonth;
 }

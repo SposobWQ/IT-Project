@@ -1,9 +1,10 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InGameTime : MonoBehaviour
 {
-    [SerializeField] private TimeScriptableObject timeScriptableObject;
+    [FormerlySerializedAs("timeScriptableObject")] [SerializeField] private PlayerData playerData;
 
     private TextMeshProUGUI time;
     private TextMeshProUGUI date;
@@ -22,10 +23,10 @@ public class InGameTime : MonoBehaviour
         time = uiData.Time;
         date = uiData.Date;
         
-        hour = timeScriptableObject.Hour;
-        minute = timeScriptableObject.Minute;
-        month = timeScriptableObject.Month;
-        day = timeScriptableObject.Day;
+        hour = playerData.Hour;
+        minute = playerData.Minute;
+        month = playerData.Month;
+        day = playerData.Day;
         gameTime = (hour * 3600) + (minute * 60);
     }
 
@@ -44,9 +45,9 @@ public class InGameTime : MonoBehaviour
 
     public void UpdateScriptableObject()
     {
-        timeScriptableObject.Hour = hour;
-        timeScriptableObject.Minute = minute;
-        timeScriptableObject.Month = month;
-        timeScriptableObject.Day = day;
+        playerData.Hour = hour;
+        playerData.Minute = minute;
+        playerData.Month = month;
+        playerData.Day = day;
     }
 }
