@@ -1,33 +1,46 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class InGameTime : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private float animDuration = 1f;
     
+    private Image image;
+    private MainUIData mainUIData;
     private TextMeshProUGUI time;
     private TextMeshProUGUI date;
     private int hour;
     private int minute;
     private string month;
     private int monthIndex;
+    private int dayofWeek;
     private int day;
     private float gameTime; 
-    private List<string> monthNames = new List<string>()
+    public readonly List<string> monthNames = new List<string>()
     {
         "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь","Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+    };
+
+    public readonly List<string> DayOfWeekNames = new List<string>()
+    {
+        "Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"
     };
     
     public float timeSpeed = 60f;
 
     private void Awake()
     {
-        MainUIData uiData = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUIData>();
+        mainUIData = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUIData>();
 
-        time = uiData.Time;
-        date = uiData.Date;
+        time = mainUIData.Time;
+        date = mainUIData.Date;
 
         monthIndex = playerData.MonthIndex;
         hour = playerData.Hour;
@@ -35,6 +48,7 @@ public class InGameTime : MonoBehaviour
         month = monthNames[monthIndex];
         day = playerData.Day;
         gameTime = (hour * 3600) + (minute * 60);
+        dayofWeek = playerData.DayOfWeekIndex;
         
         Time.timeScale = 1f;
     }
@@ -44,12 +58,31 @@ public class InGameTime : MonoBehaviour
         gameTime += Time.deltaTime * timeSpeed;
         hour = (int)(gameTime / 3600) % 24;
         minute = (int)(gameTime / 60) % 60;
+        
+        if (hour == 23)
+        {
+            StartCoroutine(goingToHome());
+        }
+
+        if (day > 28)
+        {
+            day = 1;
+            monthIndex++;
+        }
+        
         updateUITime();
     }
 
-    public void UpdateUIData()
+    private IEnumerator goingToHome()
     {
-        date.text = monthNames[monthIndex];
+        image.DOFade(1f, animDuration).SetEase(Ease.Linear).OnComplete(() => Time.timeScale = 0f);
+        yield return new WaitForSeconds(animDuration);
+        playerData.Hour = 8;
+        playerData.Minute = 0;
+        playerData.MonthIndex = monthIndex + (day > 28 ? 1 : 0);
+        playerData.DayOfWeekIndex = (dayofWeek + 1) > 6 ? 0 : dayofWeek + 1;
+        playerData.Day = day > 28 ? 0 : day;
+        SceneManager.LoadScene(1);
     }
 
     private void updateUITime()

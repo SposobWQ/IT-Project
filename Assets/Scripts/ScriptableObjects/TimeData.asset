@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642448a82b10ea348be51a64031d0460, type: 3}
   m_Name: TimeData
   m_EditorClassIdentifier: 
-  Hour: 8
-  Minute: 0
-  Month: March
-  Day: 1
+  Hour: 9
+  Minute: 39
+  MonthIndex: 2
+  Day: 21
+  Year: 0
+  DayOfWeekIndex: 4
+  Money: 0

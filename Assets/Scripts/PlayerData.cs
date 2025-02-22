@@ -9,5 +9,7 @@ public class PlayerData : ScriptableObject
     public int Minute;
     public int MonthIndex;
     public int Day;
-    public string DayOfMonth;
+    public int Year;
+    public int DayOfWeekIndex;
+    public int Money;
 }

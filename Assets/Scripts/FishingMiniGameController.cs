@@ -11,22 +11,8 @@ public class FishingMiniGameController : MonoBehaviour
     {
         inventory = GameObject.FindGameObjectWithTag("SceneController").GetComponent<Inventory>();
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            StartMinigame();
-        }
-    }
-
-    public void StartMinigame()
-    {
-        //Скрипт мини-игры
-        OnCompleteMinigame();
-    }
     
-    private void OnCompleteMinigame()
+    public void OnCompleteMinigame()
     {
         FishType randomFishType = GetRandomEnumValue<FishType>();
             

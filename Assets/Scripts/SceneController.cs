@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -82,6 +83,7 @@ public class SceneController : MonoBehaviour
         TextMeshProUGUI dialogue = mainUIData.Dialogue;
         Button closeDoor = mainUIData.CloseDoorUI;
         Button closePC = mainUIData.ClosePCUI;
+        TextMeshProUGUI money = mainUIData.MoneyText;
         
         inventoryUI = mainUIData.InventoryUIObject.GetComponent<InventoryUI>();
         inventoryUI.UpdateUI();
@@ -111,13 +113,14 @@ public class SceneController : MonoBehaviour
             }
         }
         
-        InitializeDateAndTime(date,gametime);
+        InitializeDateTimeAndMoney(date,gametime, money);
     }
 
-    private void InitializeDateAndTime(TextMeshProUGUI date, TextMeshProUGUI time)
+    private void InitializeDateTimeAndMoney(TextMeshProUGUI date, TextMeshProUGUI time, TextMeshProUGUI money)
     {
-        date.text = timeScript.Month + " " + timeScript.Day;
+        date.text = inGameTime.monthNames[timeScript.MonthIndex] + " " + timeScript.Day + " " + inGameTime.DayOfWeekNames[timeScript.DayOfWeekIndex];
         time.text = $"{timeScript.Hour:D2}:{timeScript.Minute:D2}";
+        money.text = $"{timeScript.Money} руб";
     }
 
     private void LoadFishingScene()
@@ -143,6 +146,11 @@ public class SceneController : MonoBehaviour
         Debug.Log($"Сцена {scene.name} загружена!");
         location = scene.name;
         InitializeMainUI();
+        
+        Time.timeScale = 1f;
+        Image image = mainUIData.SleepImage;
+        image.color = new Color32(0, 0, 0, 255);
+        image.DOFade(0f, 1f);
     }
 
     private void Update()
