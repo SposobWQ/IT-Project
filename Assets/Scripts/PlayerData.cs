@@ -7,7 +7,7 @@ public class PlayerData : ScriptableObject
 {
     public int Hour;
     public int Minute;
-    public string Month;
+    public int MonthIndex;
     public int Day;
     public string DayOfMonth;
 }

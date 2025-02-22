@@ -16,6 +16,7 @@ public class MainUIData : MonoBehaviour
     [SerializeField] private Button fishingButton;
     [SerializeField] private Button huntButton;
     [SerializeField] private Image dayImage;
+    [SerializeField] private GameObject inventoryUIObject;
 
     public TextMeshProUGUI Time
     {
@@ -84,6 +85,12 @@ public class MainUIData : MonoBehaviour
     {
         get => huntButton;
         set => huntButton = value;
+    }
+
+    public GameObject InventoryUIObject
+    {
+        get => inventoryUIObject;
+        set => inventoryUIObject = value;
     }
     
 }
