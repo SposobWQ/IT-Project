@@ -7,4 +7,8 @@ public class FishData : ScriptableObject
     public string fishName;   
     public Sprite icon;       
     public int basePrice;     
+    public float minWeight;
+    public float maxWeight;
+    public float minHeight;
+    public float maxHeight;
 }

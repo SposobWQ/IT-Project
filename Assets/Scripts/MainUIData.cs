@@ -19,6 +19,9 @@ public class MainUIData : MonoBehaviour
     [SerializeField] private GameObject inventoryUIObject;
     [SerializeField] private Image sleepImage;
     [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private Button exitButton;
+    [SerializeField] private Button continueButton;
+    [SerializeField] private GameObject pause;
 
     public TextMeshProUGUI Time
     {
@@ -106,5 +109,22 @@ public class MainUIData : MonoBehaviour
         get => moneyText;
         set => moneyText = value;
     }
-    
+
+    public Button ExitButton
+    {
+        get => exitButton;
+        set => exitButton = value;
+    }
+
+    public Button ContinueButton
+    {
+        get => continueButton;
+        set => continueButton = value;
+    }
+
+    public GameObject PauseObject
+    {
+        get => pause;
+        set => pause = value;
+    }
 }

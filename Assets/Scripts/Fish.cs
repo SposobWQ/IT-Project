@@ -3,20 +3,19 @@ using UnityEngine;
 [System.Serializable]
 public class Fish
 {
-    public FishData fishData; // Постоянные данные о рыбе
-    public float weight; // Вес рыбы (переменное)
-    public float length; // Длина рыбы (переменное)
+    public FishData fishData;
+    public float weight;
+    public float length;
 
     public Fish(FishData fishData, float weight, float length)
     {
         this.fishData = fishData;
-        this.weight = weight;
-        this.length = length;
+        this.weight = Random.Range(fishData.minWeight, fishData.maxWeight);
+        this.length = Random.Range(fishData.minHeight, fishData.maxHeight);
     }
 
     public int GetPrice()
     {
-        // Пример расчёта цены на основе веса и базовой цены
-        return fishData.basePrice + Mathf.RoundToInt(weight * 10);
+        return Mathf.RoundToInt(fishData.basePrice * weight);
     }
 }

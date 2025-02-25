@@ -23,9 +23,10 @@ public class InGameTime : MonoBehaviour
     private int dayofWeek;
     private int day;
     private float gameTime; 
+    
     public readonly List<string> monthNames = new List<string>()
     {
-        "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь","Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+        "Января", "Февраля", "Марта", "Апреля", "Мая", "Июня","Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
     };
 
     public readonly List<string> DayOfWeekNames = new List<string>()
@@ -34,6 +35,7 @@ public class InGameTime : MonoBehaviour
     };
     
     public float timeSpeed = 60f;
+    public int MoneyAtSell;
 
     private void Awake()
     {
@@ -81,7 +83,9 @@ public class InGameTime : MonoBehaviour
         playerData.Minute = 0;
         playerData.MonthIndex = monthIndex + (day > 28 ? 1 : 0);
         playerData.DayOfWeekIndex = (dayofWeek + 1) > 6 ? 0 : dayofWeek + 1;
-        playerData.Day = day > 28 ? 0 : day;
+        playerData.Day = day > 28 ? 0 : day+1;
+        playerData.Money += MoneyAtSell;
+        MoneyAtSell = 0;
         SceneManager.LoadScene(1);
     }
 
@@ -96,6 +100,11 @@ public class InGameTime : MonoBehaviour
         playerData.Minute = minute;
         playerData.MonthIndex = monthIndex;
         playerData.Day = day;
+    }
+
+    public void SkipDay()
+    {
+        StartCoroutine(goingToHome());
     }
 }
 /*using System.Collections.Generic;

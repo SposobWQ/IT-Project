@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee070a825aeea0469dd5d6b1c5fe070, type: 3}
   m_Name: Omul
   m_EditorClassIdentifier: 
-  fishType: 8
-  fishName: Omul
-  icon: {fileID: 0}
+  fishType: 0
+  fishName: "\u041E\u043C\u0443\u043B\u044C"
+  icon: {fileID: 21300000, guid: 1e8f0f50e78d64142823d171259be86b, type: 3}
   basePrice: 500

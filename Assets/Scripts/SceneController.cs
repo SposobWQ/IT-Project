@@ -92,10 +92,13 @@ public class SceneController : MonoBehaviour
 
         Button fishing = mainUIData.FishingButton;
         Button hunting = mainUIData.HuntButton;
+        Button closeGame = mainUIData.ExitButton;
+        Button continueGame = mainUIData.ContinueButton;
         
         fishing.onClick.AddListener(LoadFishingScene);
         hunting.onClick.AddListener(LoadHuntingScene);
-        
+        closeGame.onClick.AddListener(CloseGame);
+        continueGame.onClick.AddListener(Continue);
         closeDoor.onClick.AddListener(ButtonClickDoor);
         closePC.onClick.AddListener(ButtonClickPC);
         
@@ -118,7 +121,7 @@ public class SceneController : MonoBehaviour
 
     private void InitializeDateTimeAndMoney(TextMeshProUGUI date, TextMeshProUGUI time, TextMeshProUGUI money)
     {
-        date.text = inGameTime.monthNames[timeScript.MonthIndex] + " " + timeScript.Day + " " + inGameTime.DayOfWeekNames[timeScript.DayOfWeekIndex];
+        date.text = $"{timeScript.Day:D2} {inGameTime.monthNames[timeScript.MonthIndex]} {2025 + timeScript.Year:D4} {inGameTime.DayOfWeekNames[timeScript.DayOfWeekIndex]:D2}";
         time.text = $"{timeScript.Hour:D2}:{timeScript.Minute:D2}";
         money.text = $"{timeScript.Money} руб";
     }
@@ -162,7 +165,29 @@ public class SceneController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I))
         {
+            inventoryUI.UpdateUI();
             inventoryUI.gameObject.SetActive(!inventoryUI.gameObject.activeSelf);
         }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            inGameTime.SkipDay();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0f;
+            mainUIData.PauseObject.SetActive(!mainUIData.PauseObject.activeSelf);
+        }
+    }
+
+    private void CloseGame()
+    {
+        Application.Quit();
+    }
+
+    private void Continue()
+    {
+        mainUIData.PauseObject.SetActive(false);
     }
 }

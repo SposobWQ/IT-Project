@@ -9,6 +9,8 @@ public class FishUIElement : MonoBehaviour
     public Image fishIcon;
     public TextMeshProUGUI fishInfoText;
     public Fish fish;
+    
+    private SellManager sellManager;
 
     void Start()
     {
@@ -19,10 +21,13 @@ public class FishUIElement : MonoBehaviour
 
         icon.sprite = fish.fishData.icon;
         //nameText.text = fish.fishData.fishName;
+        
+        sellManager = GameObject.Find("SellPage")?.GetComponent<SellManager>();
     }
 
-    void OnFishButtonClick()
+    public void OnFishButtonClick()
     {
+        sellManager.fish = fish;
         fishIcon.gameObject.SetActive(true);
         fishIcon.sprite = fish.fishData.icon;
         fishInfoText.text = $"{fish.fishData.fishName}\nВес: {fish.weight} кг\nДлина: {fish.length} см\nЦена: {fish.GetPrice()}";
