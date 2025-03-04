@@ -9,9 +9,9 @@ using DG.Tweening;
 
 public class InGameTime : MonoBehaviour
 {
-    [SerializeField] private PlayerData playerData;
     [SerializeField] private float animDuration = 1f;
     
+    private PlayerData playerData;
     private Image image;
     private MainUIData mainUIData;
     private TextMeshProUGUI time;
@@ -40,6 +40,7 @@ public class InGameTime : MonoBehaviour
     private void Awake()
     {
         mainUIData = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUIData>();
+        playerData = GameObject.FindGameObjectWithTag("SceneController").GetComponent<PlayerData>();
 
         time = mainUIData.Time;
         date = mainUIData.Date;

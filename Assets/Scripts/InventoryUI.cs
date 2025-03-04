@@ -7,17 +7,15 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private GameObject fishUIPrefab;
-    [SerializeField] public Transform fishUIContainer;
+    [SerializeField] private Transform fishUIContainer;
     [SerializeField] private GameObject infoPanel;
     [SerializeField] private Image icon;
-    
-    private Inventory inventory; 
-    private MainUIData mainUIData;
+    [SerializeField]private Inventory inventory; 
+    [SerializeField]private MainUIData mainUIData;
 
     void Start()
     {
-        inventory = GameObject.Find("SceneManager").GetComponent<Inventory>();
-
+        inventory = GameObject.FindGameObjectWithTag("SceneController").GetComponent<Inventory>();
         UpdateUI();
     }
     
@@ -28,10 +26,11 @@ public class InventoryUI : MonoBehaviour
             Destroy(child.gameObject);
         }
         
-        inventory = GameObject.Find("SceneManager").GetComponent<Inventory>();
+        inventory = GameObject.FindGameObjectWithTag("SceneController").GetComponent<Inventory>();
         
         if (inventory != null)
         {
+            Debug.Log(inventory.fishInventory.Count);
             foreach (var fish in inventory.fishInventory)
             {
                 GameObject fishUI = Instantiate(fishUIPrefab, fishUIContainer);

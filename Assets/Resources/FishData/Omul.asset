@@ -20,3 +20,8 @@ MonoBehaviour:
   maxWeight: 3.5
   minHeight: 30
   maxHeight: 64
+  minMonthIndex: 7
+  maxMonthIndex: 9
+  minDay: 15
+  maxDay: 28
+  fineCost: 3000

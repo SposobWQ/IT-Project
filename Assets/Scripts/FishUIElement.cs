@@ -27,7 +27,11 @@ public class FishUIElement : MonoBehaviour
 
     public void OnFishButtonClick()
     {
-        sellManager.fish = fish;
+        if (sellManager != null)
+        {
+            sellManager.fish = fish;
+        }
+
         fishIcon.gameObject.SetActive(true);
         fishIcon.sprite = fish.fishData.icon;
         fishInfoText.text = $"{fish.fishData.fishName}\nВес: {fish.weight} кг\nДлина: {fish.length} см\nЦена: {fish.GetPrice()}";

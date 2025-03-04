@@ -11,4 +11,9 @@ public class FishData : ScriptableObject
     public float maxWeight;
     public float minHeight;
     public float maxHeight;
+    public int minMonthIndex;
+    public int maxMonthIndex;
+    public int minDay;
+    public int maxDay;
+    public int fineCost;
 }

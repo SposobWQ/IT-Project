@@ -26,7 +26,7 @@ public class FishingGame : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isFishing)
+        if (Input.GetMouseButtonDown(1) && !isFishing)
         {
             CastFishingRod();
         }
@@ -73,7 +73,7 @@ public class FishingGame : MonoBehaviour
         canvasMiniGame.SetActive(true);
         isFishing = true;
         fishingProgress = startingFishingProgress; 
-        resultText.value = 0.1f;
+        resultText.value = startingFishingProgress;
     }
 
     private void CatchFish()

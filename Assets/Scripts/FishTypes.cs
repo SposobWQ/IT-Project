@@ -1,4 +1,5 @@
 public enum FishType
 {
-    Omul
+    Omul,
+    Pike
 }

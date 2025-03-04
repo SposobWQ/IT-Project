@@ -10,9 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fee070a825aeea0469dd5d6b1c5fe070, type: 3}
-  m_Name: Omul
+  m_Name: Pike
   m_EditorClassIdentifier: 
-  fishType: 0
-  fishName: "\u041E\u043C\u0443\u043B\u044C"
+  fishType: 1
+  fishName: "\u0429\u0443\u043A\u0430"
   icon: {fileID: 21300000, guid: 1e8f0f50e78d64142823d171259be86b, type: 3}
-  basePrice: 500
+  basePrice: 200
+  minWeight: 1
+  maxWeight: 10
+  minHeight: 50
+  maxHeight: 120
+  minMonthIndex: 0
+  maxMonthIndex: 6
+  minDay: 1
+  maxDay: 5
+  fineCost: 1000

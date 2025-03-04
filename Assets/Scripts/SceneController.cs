@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -5,10 +6,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(PlayerData))]
 public class SceneController : MonoBehaviour
 {
     [SerializeField] private GameObject UI;
-    [SerializeField] private PlayerData timeScript;
     [SerializeField] private string location;
     [SerializeField] private int hunterScene = 3;
     [SerializeField] private int fishingScene = 2;
@@ -16,6 +17,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] private Button pcButton;
     [SerializeField] private Button doorButton;
 
+    private PlayerData timeScript;
     public Inventory inventory {get; private set;}
     private GameObject UIObject;
     private MainUIData mainUIData;
@@ -39,6 +41,7 @@ public class SceneController : MonoBehaviour
             return;
         }
         inventory = GetComponent<Inventory>();
+        timeScript = GetComponent<PlayerData>();
     }
 
     public void ButtonClickPC()
@@ -189,5 +192,19 @@ public class SceneController : MonoBehaviour
     private void Continue()
     {
         mainUIData.PauseObject.SetActive(false);
+    }
+
+    public void Fail()
+    {
+        timeScript.MonthIndex = 2;
+        timeScript.Year = 0;
+        timeScript.Day = 21;
+        timeScript.Hour = 8;
+        timeScript.Minute = 0;
+        timeScript.Money = 0;
+        timeScript.DayOfWeekIndex = 4;
+        inventory.fishInventory = new List<Fish>();
+        
+        SceneManager.LoadScene(homeScene);
     }
 }
